@@ -1,7 +1,13 @@
 import { api } from '../api';
 import { normalizeProduct } from '../api/mappers/products.mapper';
 import { unwrapList } from '../api/unwrapList';
-import type { ApiProduct, ProductCardData, ProductImageRecord, ProductVariant } from '../types';
+import type {
+  ApiProduct,
+  ProductCardData,
+  ProductImageRecord,
+  ProductVariant,
+  ProductWriteInput,
+} from '../types';
 
 export type SimilarProductsPayload = {
   products: ApiProduct[];
@@ -30,12 +36,28 @@ export const productsEndpoints = api.injectEndpoints({
       query: (id) => `/api/products/${id}/`,
       providesTags: (_result, _error, id) => [{ type: 'Product', id: `product-raw-${id}` }],
     }),
+    createProduct: builder.mutation<ApiProduct, ProductWriteInput>({
+      query: (body) => ({ url: '/api/products/', method: 'POST', body }),
+      invalidatesTags: ['Product'],
+    }),
+    patchProduct: builder.mutation<ApiProduct, { id: number; body: ProductWriteInput }>({
+      query: ({ id, body }) => ({
+        url: `/api/products/${id}/`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['Product'],
+    }),
+    deleteProduct: builder.mutation<void, number>({
+      query: (id) => ({ url: `/api/products/${id}/`, method: 'DELETE' }),
+      invalidatesTags: ['Product'],
+    }),
     /**
      * Raw list of products from the backend.
      * Useful when we need to resolve product by slug (the backend exposes /api/products/{id}/ only).
      */
     getProductsRaw: builder.query<ApiProduct[], void>({
-      query: () => '/api/products/',
+      query: () => '/api/products/?limit=500',
       transformResponse: (response: unknown) => unwrapList<ApiProduct>(response),
       providesTags: ['Product'],
     }),
@@ -168,6 +190,9 @@ export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
   useGetProductRawByIdQuery,
+  useCreateProductMutation,
+  usePatchProductMutation,
+  useDeleteProductMutation,
   useGetProductsRawQuery,
   useGetProductBySlugQuery,
   useGetProductDetailsBySlugOrIdQuery,
