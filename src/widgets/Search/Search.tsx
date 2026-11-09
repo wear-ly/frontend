@@ -10,7 +10,7 @@ import { useTranslation } from '@/i18n/useTranslation';
 import { getHeaderActionClass } from '@/widgets/Header/headerActionClasses';
 import { useSearchSuggestions } from '@/widgets/Search/useSearchSuggestions';
 
-const CATALOG_CATEGORY_PATH = /^\/catalog\/(women|men|accessories)/;
+const CATALOG_CATEGORY_PATH = /^\/catalog\/(women|men|accessories|fragrances|shoes)/;
 
 type SearchProps = {
   onOpen?: () => void;
@@ -33,14 +33,14 @@ function highlightMatch(text: string, query: string) {
 }
 
 export default function Search({ onOpen }: SearchProps) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const titleId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const { hits } = useSearchSuggestions(query, locale, isOpen);
+  const { hits } = useSearchSuggestions(query, isOpen);
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -74,7 +74,7 @@ export default function Search({ onOpen }: SearchProps) {
   }, [isOpen, close]);
 
   const catalogHref = (value: string) => {
-    const target = CATALOG_CATEGORY_PATH.test(pathname) ? pathname : catalogRoutes.women;
+    const target = CATALOG_CATEGORY_PATH.test(pathname) ? pathname : catalogRoutes.index;
     return `${target}?q=${encodeURIComponent(value)}`;
   };
 
