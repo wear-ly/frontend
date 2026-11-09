@@ -1,25 +1,62 @@
-import "@/styles/global.scss";
+import type { Metadata, Viewport } from 'next';
+import { PT_Sans_Caption, Unbounded } from 'next/font/google';
 
-import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer";
+import '@/styles/global.css';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'WEARLY',
+    template: 'WEARLY',
+  },
+  description: 'WEARLY — online clothing store',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  interactiveWidget: 'resizes-content',
+};
+
+import Header from '@/widgets/Header/Header';
+import Footer from '@/widgets/Footer/Footer';
+import MainContent from '@/widgets/MainContent/MainContent';
+import Providers from './providers';
+
+const ptSansCaption = PT_Sans_Caption({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-pt-sans-caption',
+  weight: ['400', '700'],
+});
+
+const unbounded = Unbounded({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-unbounded',
+  weight: ['300', '400', '500', '600', '700'],
+});
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body>
-                {/* Header */}
-                <Header />
-
-                {/* Main content */}
-                <main>{children}</main>
-
-                {/* Footer */}
-                <Footer />
-            </body>
-        </html>
-    );
+  return (
+    <html
+      lang="en"
+      className={`${ptSansCaption.variable} ${unbounded.variable} ${ptSansCaption.className}`}
+    >
+      <body className="flex min-h-screen flex-col">
+        <Providers>
+          <Header />
+          <div className="layout-container flex flex-1 flex-col">
+            <div className="flex-1">
+              <MainContent>{children}</MainContent>
+            </div>
+          </div>
+          <Footer />
+        </Providers>
+      </body>
+    </html>
+  );
 }
