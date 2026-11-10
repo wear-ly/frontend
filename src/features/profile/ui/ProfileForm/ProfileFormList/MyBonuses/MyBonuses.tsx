@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const MyBonuses = () => {
   const [dataBonus, setDataBonus] = useState(myBonus);
-  const arrDataBonus = dataBonus.history
+  const arrDataBonus = dataBonus.history;
   console.log(dataBonus);
   const { t } = useTranslation();
   return (

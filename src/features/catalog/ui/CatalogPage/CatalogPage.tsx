@@ -104,7 +104,8 @@ export default function CatalogPage({ category }: CatalogPageProps) {
     Number(isPartial(filters.group, CATALOG_GROUP_FILTERS.length));
 
   const bannerCategory: CatalogScope =
-    category === 'fragrances' || (filters.subcategory ?? []).some((item) => isFragranceSubcategory(item))
+    category === 'fragrances' ||
+    (filters.subcategory ?? []).some((item) => isFragranceSubcategory(item))
       ? 'fragrances'
       : category;
 
@@ -123,7 +124,8 @@ export default function CatalogPage({ category }: CatalogPageProps) {
       selectedSubcategories.length === 1
         ? facets.subcategories.find(
             (item) =>
-              item.slug === selectedSubcategories[0] || String(item.id) === selectedSubcategories[0],
+              item.slug === selectedSubcategories[0] ||
+              String(item.id) === selectedSubcategories[0],
           )
         : undefined;
 

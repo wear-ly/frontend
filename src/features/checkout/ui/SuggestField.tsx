@@ -65,7 +65,9 @@ export default function SuggestField({
   return (
     <div ref={rootRef} className="relative flex flex-col gap-2">
       {label ? (
-        <span className="font-[family-name:var(--font-poppins)] text-[16px] text-black">{label}</span>
+        <span className="font-[family-name:var(--font-poppins)] text-[16px] text-black">
+          {label}
+        </span>
       ) : null}
       <div
         className={`flex h-12 items-center rounded-lg border bg-white px-2.5 ${

@@ -40,14 +40,7 @@ type CatalogFilterPanelProps = {
   onApply: (next: FilterDraft) => void;
 };
 
-type AccordionId =
-  | 'sort'
-  | 'gender'
-  | 'productType'
-  | 'categories'
-  | 'size'
-  | 'color'
-  | 'brand';
+type AccordionId = 'sort' | 'gender' | 'productType' | 'categories' | 'size' | 'color' | 'brand';
 
 function toggleValue<T extends string>(list: T[], value: T): T[] {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
@@ -356,9 +349,13 @@ export default function CatalogFilterPanel({
                       type="checkbox"
                       className="sr-only"
                       checked={isEverySelected(draft.gender, CATALOG_GENDER_FILTERS)}
-                      onChange={() => setList('gender', toggleAllValues(draft.gender, CATALOG_GENDER_FILTERS))}
+                      onChange={() =>
+                        setList('gender', toggleAllValues(draft.gender, CATALOG_GENDER_FILTERS))
+                      }
                     />
-                    <CheckboxControl checked={isEverySelected(draft.gender, CATALOG_GENDER_FILTERS)} />
+                    <CheckboxControl
+                      checked={isEverySelected(draft.gender, CATALOG_GENDER_FILTERS)}
+                    />
                     {t.catalog.genderAll}
                   </label>
                 </li>
@@ -403,7 +400,9 @@ export default function CatalogFilterPanel({
                           setList('subcategory', toggleAllValues(draft.subcategory, subcategoryIds))
                         }
                       />
-                      <CheckboxControl checked={isEverySelected(draft.subcategory, subcategoryIds)} />
+                      <CheckboxControl
+                        checked={isEverySelected(draft.subcategory, subcategoryIds)}
+                      />
                       {t.catalog.selectAll}
                     </label>
                   </li>
@@ -449,9 +448,13 @@ export default function CatalogFilterPanel({
                       type="checkbox"
                       className="sr-only"
                       checked={isEverySelected(draft.group, CATALOG_GROUP_FILTERS)}
-                      onChange={() => setList('group', toggleAllValues(draft.group, CATALOG_GROUP_FILTERS))}
+                      onChange={() =>
+                        setList('group', toggleAllValues(draft.group, CATALOG_GROUP_FILTERS))
+                      }
                     />
-                    <CheckboxControl checked={isEverySelected(draft.group, CATALOG_GROUP_FILTERS)} />
+                    <CheckboxControl
+                      checked={isEverySelected(draft.group, CATALOG_GROUP_FILTERS)}
+                    />
                     {t.catalog.selectAll}
                   </label>
                 </li>

@@ -42,9 +42,7 @@ export default function BrandsMegaMenu() {
   const { t } = useTranslation();
   const { data: brands } = useGetBrandsQuery();
 
-  const brandNames = Array.isArray(brands)
-    ? brands.map((item) => item.name)
-    : [];
+  const brandNames = Array.isArray(brands) ? brands.map((item) => item.name) : [];
   const columns = buildBrandColumns(brandNames);
 
   return (

@@ -28,7 +28,10 @@ export const catalogMetaEndpoints = api.injectEndpoints({
       query: (body) => ({ url: '/api/product-variants/', method: 'POST', body }),
       invalidatesTags: ['Product'],
     }),
-    patchProductVariant: builder.mutation<ProductVariant, { id: number; body: ProductVariantWrite }>({
+    patchProductVariant: builder.mutation<
+      ProductVariant,
+      { id: number; body: ProductVariantWrite }
+    >({
       query: ({ id, body }) => ({ url: `/api/product-variants/${id}/`, method: 'PATCH', body }),
       invalidatesTags: ['Product'],
     }),

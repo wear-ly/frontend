@@ -56,7 +56,7 @@ const OrderFormList = () => {
               <span>{tab.label}</span>
               <span>{tab.count}</span>
               {/*{tab.label}*/}
-{/*comment*/}
+              {/*comment*/}
             </button>
           ))}
         </div>
@@ -68,5 +68,3 @@ const OrderFormList = () => {
 };
 
 export default OrderFormList;
-
-

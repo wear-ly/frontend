@@ -27,9 +27,7 @@ export default function FeaturedFramesSection() {
               quality={80}
               className="object-cover object-top"
             />
-            <p className={`${landingSection.editorialTitle} text-white`}>
-              {lookEditorial.title}
-            </p>
+            <p className={`${landingSection.editorialTitle} text-white`}>{lookEditorial.title}</p>
           </Link>
 
           <div className="w-full max-w-[413px] shrink-0 md:w-[413px]">
@@ -68,9 +66,7 @@ export default function FeaturedFramesSection() {
               quality={80}
               className="object-cover"
             />
-            <p className={`${landingSection.editorialTitle} text-white`}>
-              {scentEditorial.title}
-            </p>
+            <p className={`${landingSection.editorialTitle} text-white`}>{scentEditorial.title}</p>
           </Link>
         </div>
       </div>
