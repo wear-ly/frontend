@@ -68,7 +68,7 @@
   --landing-category-thumb-height: 140px;
 
   --auth-backdrop-ratio: 60%;
-  --auth-panel-ratio: 40%; 
+  --auth-panel-ratio: 40%;
 }
 
 @supports not (height: 100dvh) {
