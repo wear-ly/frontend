@@ -14,7 +14,8 @@ const PLAIN_LAYOUT_PATHS = new Set(['/401', '/404', '/500']);
 
 export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
-  const isPlainLayout = PLAIN_LAYOUT_PATHS.has(pathname) || pathname === '/admin' || pathname.startsWith('/admin/');
+  const isPlainLayout =
+    PLAIN_LAYOUT_PATHS.has(pathname) || pathname === '/admin' || pathname.startsWith('/admin/');
 
   if (isPlainLayout) {
     return <>{children}</>;

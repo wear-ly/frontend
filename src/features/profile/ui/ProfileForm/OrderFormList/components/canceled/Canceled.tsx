@@ -1,10 +1,8 @@
-
 import CanceledDelivery from '@/data/MyOrders_json/CanceledDelivery.json';
 import statusCancelDeliveryImg from '@/../public/images/MyOrders/Canceled/Canceled.png';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-
 
 const Canceled = () => {
   const order = CanceledDelivery;

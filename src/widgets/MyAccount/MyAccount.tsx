@@ -24,6 +24,9 @@ export default function MyAccount({
 
   const isActive = isActivePath(pathname, '/profile') || isOpen;
 
+  const actionClass = (active: boolean) =>
+    `${getHeaderActionClass(active)} cursor-pointer border-x-0 border-t-0 bg-transparent text-inherit no-underline [&_svg]:block`;
+
   const toggle = () => {
     if (hasSession && isAuthenticated) {
       router.push('/profile');
@@ -56,6 +59,7 @@ export default function MyAccount({
   return (
     <button
       type="button"
+      className={actionClass(isActive)}
       onClick={toggle}
       aria-expanded={isOpen}
       aria-controls="auth-overlay"

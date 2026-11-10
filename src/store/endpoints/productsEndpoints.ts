@@ -169,18 +169,14 @@ export const productsEndpoints = api.injectEndpoints({
                 : unwrapList<ProductVariant>(variantsResult.data).filter((variant) =>
                     watchedIds.has(Number(variant.product)),
                   ),
-              images: imagesResult.error
-                ? []
-                : unwrapList<ProductImageRecord>(imagesResult.data),
+              images: imagesResult.error ? [] : unwrapList<ProductImageRecord>(imagesResult.data),
             },
           };
         } catch {
           return { data: { products, variants: [], images: [] } };
         }
       },
-      providesTags: (_result, _error, arg) => [
-        { type: 'Product', id: `similar-${arg.productId}` },
-      ],
+      providesTags: (_result, _error, arg) => [{ type: 'Product', id: `similar-${arg.productId}` }],
     }),
   }),
   overrideExisting: process.env.NODE_ENV !== 'production',

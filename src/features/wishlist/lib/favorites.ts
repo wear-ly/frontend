@@ -78,10 +78,7 @@ export function normalizeFavorite(raw: unknown): Favorite | null {
   };
 }
 
-export function toWishlistItem(
-  favorite: Favorite,
-  variants: ProductVariant[] = [],
-): WishlistItem {
+export function toWishlistItem(favorite: Favorite, variants: ProductVariant[] = []): WishlistItem {
   const productId =
     favorite.productId || productIdFromVariantId(favorite.variantId, variants) || '';
 
