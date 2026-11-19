@@ -3,10 +3,7 @@
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  pickVariantForProduct,
-  toApiProductId,
-} from '@/features/wishlist/lib/favorites';
+import { pickVariantForProduct, toApiProductId } from '@/features/wishlist/lib/favorites';
 import { useLazyGetProductVariantsQuery } from '@/store/endpoints/catalogMetaEndpoints';
 import {
   useCreateFavoriteMutation,

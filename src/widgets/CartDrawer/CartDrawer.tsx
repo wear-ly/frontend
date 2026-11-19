@@ -256,34 +256,34 @@ export default function CartDrawer() {
           </button>
         ) : (
           <div className="mt-auto flex flex-col gap-[50px] pt-4">
-          <div>
-            <div className="h-px w-full bg-black/40" />
-            <div className="mt-4 flex items-start justify-between gap-6">
-              <div className="flex max-w-[242px] flex-col gap-3">
-                <p className="m-0 font-heading text-[20px] leading-[1.2] font-normal text-black">
-                  {t.cartDrawer.estimatedTotal}
-                </p>
-                <p className="m-0 font-sans text-[16px] leading-[1.2] font-normal text-black/60">
-                  {t.cartDrawer.shippingNote}
+            <div>
+              <div className="h-px w-full bg-black/40" />
+              <div className="mt-4 flex items-start justify-between gap-6">
+                <div className="flex max-w-[242px] flex-col gap-3">
+                  <p className="m-0 font-heading text-[20px] leading-[1.2] font-normal text-black">
+                    {t.cartDrawer.estimatedTotal}
+                  </p>
+                  <p className="m-0 font-sans text-[16px] leading-[1.2] font-normal text-black/60">
+                    {t.cartDrawer.shippingNote}
+                  </p>
+                </div>
+                <p className="m-0 font-heading text-[20px] leading-[1.2] font-light text-black">
+                  {formatCartPrice(estimatedTotal, currency)}
                 </p>
               </div>
-              <p className="m-0 font-heading text-[20px] leading-[1.2] font-light text-black">
-                {formatCartPrice(estimatedTotal, currency)}
-              </p>
             </div>
-          </div>
 
-          <button
-            type="button"
-            disabled={cartItems.length === 0}
-            className="inline-flex h-14 w-full items-center justify-center rounded-lg bg-dark px-5 font-heading text-[16px] leading-none font-normal text-white disabled:opacity-40"
-            onClick={() => {
-              closeCart();
-              router.push('/checkout');
-            }}
-          >
-            {t.cartDrawer.checkout}
-          </button>
+            <button
+              type="button"
+              disabled={cartItems.length === 0}
+              className="inline-flex h-14 w-full items-center justify-center rounded-lg bg-dark px-5 font-heading text-[16px] leading-none font-normal text-white disabled:opacity-40"
+              onClick={() => {
+                closeCart();
+                router.push('/checkout');
+              }}
+            >
+              {t.cartDrawer.checkout}
+            </button>
           </div>
         )}
       </aside>

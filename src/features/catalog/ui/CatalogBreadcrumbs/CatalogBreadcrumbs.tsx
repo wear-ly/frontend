@@ -15,10 +15,7 @@ type CatalogBreadcrumbsProps = {
   variant?: 'banner' | 'page';
 };
 
-export default function CatalogBreadcrumbs({
-  items,
-  variant = 'page',
-}: CatalogBreadcrumbsProps) {
+export default function CatalogBreadcrumbs({ items, variant = 'page' }: CatalogBreadcrumbsProps) {
   const { t } = useTranslation();
 
   if (items.length === 0) return null;

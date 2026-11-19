@@ -41,7 +41,8 @@ export const catalogFilterPanel = {
   accordionBtn:
     'flex w-full min-h-14 cursor-pointer items-center justify-between gap-3 border-none bg-transparent px-0 py-3 text-left text-base font-medium text-black',
   optionList: 'm-0 flex list-none flex-col gap-1 px-0 pt-0 pb-4',
-  optionLabel: 'flex min-h-11 cursor-pointer items-center gap-3 text-[15px] leading-none text-black',
+  optionLabel:
+    'flex min-h-11 cursor-pointer items-center gap-3 text-[15px] leading-none text-black',
 } as const;
 
 export const catalogGrid = {

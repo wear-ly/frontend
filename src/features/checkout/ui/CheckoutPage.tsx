@@ -102,7 +102,8 @@ export default function CheckoutPage() {
   const shippingFee = 0;
   const total = subtotal - discount + shippingFee;
 
-  const selectedPhone = phoneCountries.find((country) => country.iso === phoneIso) ?? phoneCountries[0];
+  const selectedPhone =
+    phoneCountries.find((country) => country.iso === phoneIso) ?? phoneCountries[0];
   const novaPoshtaAvailable = countryId === 'UA';
 
   const applyPhoneCountry = (iso: string) => {
@@ -250,7 +251,8 @@ export default function CheckoutPage() {
     if (!firstName.trim()) nextErrors.firstName = t.checkout.required;
     if (!lastName.trim()) nextErrors.lastName = t.checkout.required;
     if (!/^\d{7,12}$/.test(phone.replace(/\s/g, ''))) nextErrors.phone = t.checkout.invalidPhone;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) nextErrors.email = t.checkout.invalidEmail;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+      nextErrors.email = t.checkout.invalidEmail;
     if (!countryId) nextErrors.country = t.checkout.required;
     if (!cityRef) nextErrors.city = t.checkout.selectCity;
     if (!warehouseRef) nextErrors.warehouse = t.checkout.selectWarehouse;
@@ -322,7 +324,9 @@ export default function CheckoutPage() {
                 className={`${inputClass} ${errors.firstName ? 'border-error' : ''}`}
                 onChange={(event) => setFirstName(event.target.value)}
               />
-              {errors.firstName ? <span className="text-[12px] text-error">{errors.firstName}</span> : null}
+              {errors.firstName ? (
+                <span className="text-[12px] text-error">{errors.firstName}</span>
+              ) : null}
             </label>
             <label className="flex flex-col gap-1">
               <input
@@ -331,7 +335,9 @@ export default function CheckoutPage() {
                 className={`${inputClass} ${errors.lastName ? 'border-error' : ''}`}
                 onChange={(event) => setLastName(event.target.value)}
               />
-              {errors.lastName ? <span className="text-[12px] text-error">{errors.lastName}</span> : null}
+              {errors.lastName ? (
+                <span className="text-[12px] text-error">{errors.lastName}</span>
+              ) : null}
             </label>
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -421,7 +427,9 @@ export default function CheckoutPage() {
                     ))}
                   </ul>
                 ) : null}
-                {errors.phone ? <span className="text-[12px] text-error">{errors.phone}</span> : null}
+                {errors.phone ? (
+                  <span className="text-[12px] text-error">{errors.phone}</span>
+                ) : null}
               </div>
 
               <label className="flex flex-col gap-2">
@@ -435,7 +443,9 @@ export default function CheckoutPage() {
                   className={`${inputClass} ${errors.email ? 'border-error' : ''}`}
                   onChange={(event) => setEmail(event.target.value)}
                 />
-                {errors.email ? <span className="text-[12px] text-error">{errors.email}</span> : null}
+                {errors.email ? (
+                  <span className="text-[12px] text-error">{errors.email}</span>
+                ) : null}
               </label>
             </div>
           </div>
@@ -576,7 +586,11 @@ export default function CheckoutPage() {
               </h2>
               <Image src="/images/catalog/Edit.svg" alt="" width={24} height={24} />
             </div>
-            <div className="flex flex-wrap gap-[23px]" role="radiogroup" aria-label={t.checkout.paymentMethod}>
+            <div
+              className="flex flex-wrap gap-[23px]"
+              role="radiogroup"
+              aria-label={t.checkout.paymentMethod}
+            >
               {payments.map((method) => (
                 <button
                   key={method.id}
@@ -627,13 +641,17 @@ export default function CheckoutPage() {
               <h2 className="m-0 font-heading text-[22px] font-normal text-black">
                 {t.checkout.shoppingCard}
               </h2>
-              <p className="m-0 font-heading text-[20px] font-normal text-black">{t.checkout.price}</p>
+              <p className="m-0 font-heading text-[20px] font-normal text-black">
+                {t.checkout.price}
+              </p>
             </div>
             <div className="h-px bg-black/40" />
             {cartItems.length === 0 ? (
               <div className="py-10 text-center">
                 <p className="m-0 font-heading text-[20px] text-black">{t.checkout.emptyTitle}</p>
-                <p className="m-0 mt-2 font-sans text-[16px] text-black/60">{t.checkout.emptyText}</p>
+                <p className="m-0 mt-2 font-sans text-[16px] text-black/60">
+                  {t.checkout.emptyText}
+                </p>
                 <Link
                   href="/catalog"
                   className="mt-6 inline-flex h-12 items-center justify-center rounded-lg bg-dark px-6 font-heading text-[16px] text-white"
@@ -688,7 +706,12 @@ export default function CheckoutPage() {
                               className="inline-flex size-6 items-center justify-center border-0 bg-transparent p-0 disabled:opacity-40"
                               onClick={() => changeQuantity(item, item.quantity - 1)}
                             >
-                              <Image src="/images/catalog/minus-icon.svg" alt="" width={24} height={24} />
+                              <Image
+                                src="/images/catalog/minus-icon.svg"
+                                alt=""
+                                width={24}
+                                height={24}
+                              />
                             </button>
                             <span className="font-sans text-[20px] leading-[1.2] text-black">
                               {item.quantity}
@@ -699,7 +722,12 @@ export default function CheckoutPage() {
                               className="inline-flex size-6 items-center justify-center border-0 bg-transparent p-0"
                               onClick={() => changeQuantity(item, item.quantity + 1)}
                             >
-                              <Image src="/images/catalog/plus-icon.svg" alt="" width={24} height={24} />
+                              <Image
+                                src="/images/catalog/plus-icon.svg"
+                                alt=""
+                                width={24}
+                                height={24}
+                              />
                             </button>
                           </div>
                           <button
@@ -787,7 +815,13 @@ export default function CheckoutPage() {
                 key={src}
                 className="flex h-16 items-center justify-center rounded-[5px] border-2 border-[#c0c0c0] px-2"
               >
-                <Image src={src} alt="" width={138} height={45} className="h-auto max-h-11 w-full object-contain" />
+                <Image
+                  src={src}
+                  alt=""
+                  width={138}
+                  height={45}
+                  className="h-auto max-h-11 w-full object-contain"
+                />
               </div>
             ))}
           </div>

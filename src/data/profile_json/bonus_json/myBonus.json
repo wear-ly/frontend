@@ -4,7 +4,6 @@
     "exchangeRate": {
       "points": 1,
       "discount": 0.01
-
     },
     "minOrder": {
       "amount": 50

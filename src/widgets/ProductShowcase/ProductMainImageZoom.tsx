@@ -185,10 +185,7 @@ export default function ProductMainImageZoom({
     [enableClickToggle],
   );
 
-  const lightboxWidth = Math.max(
-    naturalSize.width,
-    (frameSize.width || width) * LIGHTBOX_MIN_ZOOM,
-  );
+  const lightboxWidth = Math.max(naturalSize.width, (frameSize.width || width) * LIGHTBOX_MIN_ZOOM);
   const lightboxHeight = Math.max(
     naturalSize.height,
     (frameSize.height || height) * LIGHTBOX_MIN_ZOOM,
@@ -198,9 +195,7 @@ export default function ProductMainImageZoom({
     <div
       ref={frameRef}
       className={`absolute inset-0 overflow-hidden ${
-        isPinned
-          ? 'cursor-zoom-out'
-          : '[@media(hover:hover)_and_(pointer:fine)]:cursor-zoom-in'
+        isPinned ? 'cursor-zoom-out' : '[@media(hover:hover)_and_(pointer:fine)]:cursor-zoom-in'
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
@@ -210,9 +205,7 @@ export default function ProductMainImageZoom({
       role={enableClickToggle ? 'button' : undefined}
       tabIndex={enableClickToggle ? 0 : undefined}
       aria-pressed={enableClickToggle ? isPinned : undefined}
-      aria-label={
-        enableClickToggle ? (isPinned ? zoomOutLabel : zoomInLabel) : undefined
-      }
+      aria-label={enableClickToggle ? (isPinned ? zoomOutLabel : zoomInLabel) : undefined}
     >
       {isLightbox ? (
         <Image

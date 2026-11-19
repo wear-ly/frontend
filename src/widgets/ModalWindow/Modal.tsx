@@ -1,4 +1,3 @@
-
 const modal =
   'h-dvh w-dvw bg-white/10 backdrop-blur-sm fixed top-0 left-0 flex items-center justify-center ';
 

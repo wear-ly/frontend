@@ -1,9 +1,4 @@
-export type CatalogSortOption =
-  | 'featured'
-  | 'price_asc'
-  | 'price_desc'
-  | 'newest'
-  | 'bestsellers';
+export type CatalogSortOption = 'featured' | 'price_asc' | 'price_desc' | 'newest' | 'bestsellers';
 
 export type CatalogGenderFilter = 'men' | 'women';
 export type CatalogGroupFilter = 'clothing' | 'accessories' | 'fragrances';
