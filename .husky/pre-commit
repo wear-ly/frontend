@@ -1,0 +1,12 @@
+branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+pattern='^(main|develop|(feat|fix|chore|docs|refactor|test|style|perf|ci|build|revert|hotfix|release)/[a-z0-9._-]+)$'
+
+if ! echo "$branch" | grep -Eq "$pattern"; then
+  echo "❌ Invalid branch name: '$branch'"
+  echo "   Expected: <type>/<kebab-case-name>"
+  echo "   Types: feat, fix, chore, docs, refactor, test, style, perf, ci, build, revert, hotfix, release"
+  echo "   Example: fix/my-account-cleanup"
+  exit 1
+fi
+
+npx lint-staged
