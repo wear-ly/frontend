@@ -30,7 +30,12 @@ const OrderFormList = () => {
         count: arrOrederCancelDeliveryJson.length,
       },
     ],
-    [t, arrOrederJson.length],
+    [
+      t,
+      arrOrederJson.length,
+      arrOrederArrivedDeliveryJson.length,
+      arrOrederCancelDeliveryJson.length,
+    ],
   );
 
   const tabContent: Record<Tab, ReactNode> = {
