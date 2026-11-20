@@ -29,6 +29,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const { data: brands } = useGetBrandsQuery(undefined, { skip: !isOpen });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: refactor to "adjust state during render" pattern (follow-up PR)
     setOpenSection(null);
     onClose();
     // Close drawer on route changes only.

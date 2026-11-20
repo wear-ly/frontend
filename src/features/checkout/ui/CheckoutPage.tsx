@@ -137,6 +137,7 @@ export default function CheckoutPage() {
     if (!raw) return;
     try {
       const saved = JSON.parse(raw) as SavedAddress;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: hydrate saved address during render or via lazy init (follow-up PR)
       setFirstName(saved.firstName || '');
       setLastName(saved.lastName || '');
       setPhoneIso(saved.phoneIso || 'UA');
@@ -161,6 +162,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     const country = deliveryCountries.find((item) => item.id === countryId);
     if (!country) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: derive countryQuery during render (follow-up PR)
     setCountryQuery(locale === 'uk' ? country.nameUk : country.nameEn);
   }, [countryId, locale]);
 

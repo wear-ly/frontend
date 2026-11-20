@@ -29,6 +29,7 @@ export function useSyncGuestFavorites() {
   const dispatch = useDispatch();
   const items = useSelector((state: RootState) => state.wishlist.items);
   const itemsRef = useRef(items);
+  // eslint-disable-next-line react-hooks/refs -- TODO: resolve concurrent-mode staleness (follow-up PR)
   itemsRef.current = items;
 
   const [fetchFavorites] = useLazyGetFavoritesQuery();

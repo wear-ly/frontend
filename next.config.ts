@@ -1,8 +1,6 @@
 import type { NextConfig } from 'next';
 
-const apiOrigin = new URL(
-  process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080',
-).origin;
+const apiOrigin = new URL(process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080').origin;
 
 const nextConfig: NextConfig = {
   images: {
