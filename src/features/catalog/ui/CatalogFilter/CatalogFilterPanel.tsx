@@ -185,6 +185,7 @@ export default function CatalogFilterPanel({
     wasOpenRef.current = isOpen;
     if (!justOpened) return;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: refactor to "adjust state during render" pattern (follow-up PR)
     setDraft({
       sort,
       gender: withAllSelected(selectedGenders, CATALOG_GENDER_FILTERS),
