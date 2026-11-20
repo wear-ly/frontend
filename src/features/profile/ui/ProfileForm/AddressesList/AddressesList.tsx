@@ -1,6 +1,6 @@
-import Modal from '@/widgets/ModalWindow/Modal';
+'use client';
 
-('use сlient');
+import Modal from '@/widgets/ModalWindow/Modal';
 import addressJson from '@/data/profile_json/address_json/address.json';
 import { useState } from 'react';
 import Image from 'next/image';
