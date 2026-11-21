@@ -11,10 +11,21 @@ import {
   flagImageSrc,
   phoneCountries,
 } from '@/features/checkout/lib/phoneCountries';
+import { useSessionEmail } from '@/features/auth/hooks/useSessionEmail';
+import { useAuthOverlay } from '@/features/auth/context/AuthOverlayContext';
 import { useTranslation } from '@/i18n/useTranslation';
+import { usePlaceOrderMutation } from '@/store/endpoints/ordersEndpoints';
 import type { RootState } from '@/store/store';
-import { removeFromCart, setCartItemQuantity } from '@/store/slices/cartSlice';
+import { clearCart, removeFromCart, setCartItemQuantity } from '@/store/slices/cartSlice';
 import type { CartItem } from '@/store/types';
+
+const getOrderErrorMessage = (error: unknown): string | undefined => {
+  const data = (error as { data?: unknown } | undefined)?.data;
+  if (!data || typeof data !== 'object') return undefined;
+  const messages = Object.values(data as Record<string, unknown>).flat();
+  const first = messages.find((value): value is string => typeof value === 'string');
+  return first;
+};
 
 const SAVED_ADDRESS_KEY = 'wearly.checkout.address';
 
@@ -92,6 +103,9 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitNote, setSubmitNote] = useState('');
   const [loadError, setLoadError] = useState('');
+  const [placeOrder, { isLoading: isPlacingOrderLoading }] = usePlaceOrderMutation();
+  const { hasSession } = useSessionEmail();
+  const { openAuth } = useAuthOverlay();
 
   const cartItems = items.filter(
     (item) => typeof item.price === 'number' && typeof item.title === 'string',
@@ -245,8 +259,9 @@ export default function CheckoutPage() {
     );
   };
 
-  const onSubmit = (event: React.FormEvent) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (isPlacingOrderLoading) return;
     const nextErrors: FieldErrors = {};
     if (!firstName.trim()) nextErrors.firstName = t.checkout.required;
     if (!lastName.trim()) nextErrors.lastName = t.checkout.required;
@@ -259,6 +274,8 @@ export default function CheckoutPage() {
     if (!payment) nextErrors.payment = t.checkout.selectPayment;
     if (!agreed) nextErrors.terms = t.checkout.agreeRequired;
     if (cartItems.length === 0) nextErrors.payment = t.checkout.emptyText;
+    else if (cartItems.some((item) => item.variantId <= 0))
+      nextErrors.payment = t.checkout.variantMissing;
 
     setErrors(nextErrors);
     setSubmitNote('');
@@ -283,7 +300,28 @@ export default function CheckoutPage() {
       window.localStorage.removeItem(SAVED_ADDRESS_KEY);
     }
 
-    setSubmitNote(t.checkout.noEndpoint);
+    if (!hasSession) {
+      openAuth('login', { hintMessage: t.checkout.loginRequired, hintType: 'error' });
+      return;
+    }
+
+    try {
+      const order = await placeOrder({
+        items: cartItems,
+        order: {
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          phone: `${selectedPhone.dial}${phone.replace(/\D/g, '')}`,
+          shipping_address: [countryQuery.trim(), city, warehouse].filter(Boolean).join(', '),
+          comment: notes.trim(),
+          currency_code: currency,
+        },
+      }).unwrap();
+      dispatch(clearCart());
+      setSubmitNote(t.checkout.orderPlaced.replace('{id}', String(order.id)));
+    } catch (error) {
+      setSubmitNote(getOrderErrorMessage(error) ?? t.checkout.orderFailed);
+    }
   };
 
   const payments: { id: PaymentId; src: string; alt: string }[] = [
@@ -828,7 +866,9 @@ export default function CheckoutPage() {
           <div className="h-px bg-black/40" />
           <button
             type="submit"
-            className="inline-flex h-14 w-full items-center justify-center rounded-lg bg-dark px-5 font-heading text-[16px] font-normal text-white"
+            disabled={isPlacingOrderLoading}
+            aria-busy={isPlacingOrderLoading}
+            className="inline-flex h-14 w-full items-center justify-center rounded-lg bg-dark px-5 font-heading text-[16px] font-normal text-white disabled:opacity-60"
           >
             {t.checkout.confirm}
           </button>

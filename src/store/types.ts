@@ -184,6 +184,45 @@ export interface CartItem {
   size?: string;
 }
 
+export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+
+export interface OrderItem {
+  id: number;
+  product_variant: number | null;
+  product_name: string;
+  sku: string;
+  size: string;
+  color: string;
+  unit_price: string;
+  quantity: number;
+  line_total: string;
+}
+
+export interface Order {
+  id: number;
+  status: OrderStatus;
+  currency_code: string;
+  total_amount: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  shipping_address: string;
+  comment: string;
+  items: OrderItem[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrderCreateInput {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  shipping_address: string;
+  comment?: string;
+  currency_code?: string;
+}
+
 export interface WishlistItem {
   productId: string;
   favoriteId?: number;

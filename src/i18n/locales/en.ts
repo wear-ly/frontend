@@ -810,8 +810,10 @@ const en = {
     selectWarehouse: 'Choose a post office or parcel locker.',
     agreeRequired: 'Confirm the terms and privacy policy.',
     selectPayment: 'Choose a payment method.',
-    noEndpoint:
-      'The form is filled in. The store has no order endpoint yet, so the order is not sent to email or the admin panel.',
+    orderPlaced: 'Order #{id} has been placed. We will contact you to confirm it.',
+    orderFailed: 'Could not place the order. Please try again.',
+    loginRequired: 'Log in to place an order.',
+    variantMissing: 'Choose a size and color for every item in the cart.',
     loadError: 'Could not load Nova Poshta data.',
     npOnlyUkraine: 'Nova Poshta post offices and parcel lockers are available in Ukraine.',
     noMatches: 'Nothing found.',
