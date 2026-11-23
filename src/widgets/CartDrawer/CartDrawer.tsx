@@ -32,6 +32,7 @@ export default function CartDrawer() {
 
   useLayoutEffect(() => {
     if (!isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: refactor to "adjust state during render" pattern (follow-up PR)
       setIsVisible(false);
       return;
     }

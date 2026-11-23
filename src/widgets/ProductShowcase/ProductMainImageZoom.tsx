@@ -64,6 +64,7 @@ export default function ProductMainImageZoom({
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- TODO: refactor to "adjust state during render" pattern (follow-up PR)
     setIsHovering(false);
     setIsPinned(false);
     setOrigin({ x: 50, y: 50 });

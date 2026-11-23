@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import StarRating from '@/widgets/StarRating/StarRating';
-import WishlistButton from '@/features/wishlist/ui/WishlistButton/WishlistButton';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCartDrawer } from '@/features/cart/context/CartDrawerContext';
